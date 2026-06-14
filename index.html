@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="header">
+            <div class="stat-box">
+                <span class="stat-label">Баланс</span>
+                <div class="stat-value"><span id="balance">0</span> $</div>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">В час</span>
+                <div class="stat-value text-green">+<span id="income">0</span> $</div>
+            </div>
+        </div>
+
+        <div id="screen-work" class="game-screen active-screen">
+            <div class="click-area">
+                <div class="click-hero" id="heroBtn">
+                    <img src="https://i.postimg.cc/TPnGZtDK/Chat-GPT-Image-Jun-2-2026-09-37-28-PM.png" alt="Работяга" class="hero-img">
+                    <div class="hero-title">ВКАЛЫВАТЬ</div>
+                </div>
+            </div>
+
+            <div class="energy-container">
+                <div class="energy-text">⚡ <span id="energy-val">100</span> / <span id="energy-max">100</span></div>
+                <div class="energy-bar-bg">
+                    <div class="energy-bar-fill" id="energy-fill"></div>
+                </div>
+            </div>
+
+            <div class="inventory-container">
+                <div class="inventory-title">Снаряга цеха</div>
+                <div class="inventory-shelf" id="inventory-shelf">
+                    </div>
+            </div>
+        </div>
+
+        <div id="screen-tasks" class="game-screen">
+            <div class="placeholder-screen">
+                <h3>📋 Задания</h3>
+                <p>Выполняйте поручения бригадира (скоро).</p>
+            </div>
+        </div>
+
+        <div id="screen-friends" class="game-screen">
+            <div class="placeholder-screen">
+                <h3>👥 Друзья</h3>
+                <p>Пригласите корешей с соседнего завода (скоро).</p>
+            </div>
+        </div>
+
+        <div id="screen-shop" class="shop-sheet">
+            <div class="sheet-handle" id="closeShopBtn"></div>
+
+            <div class="upgrades-section">
+                <div class="shop-header">
+                    <h3>Улучшения цеха</h3>
+                    <button class="close-txt-btn" id="closeShopTxtBtn">Готово</button>
+                </div>
+
+                <div class="upgrade-card" id="card-hammer">
+                    <div class="card-info">
+                        <div class="card-avatar">
+                            <span class="card-emoji">🔨</span>
+                            <div class="level-badge" id="badge-hammer">0</div>
+                        </div>
+                        <div>
+                            <div class="card-name">Тяжелая кувалда</div>
+                            <div class="card-effect">+1 $ за тап</div>
+                        </div>
+                    </div>
+                    <button class="buy-btn" id="buy-hammer">Купить: <span class="card-cost">100</span> $</button>
+                </div>
+
+                <div class="upgrade-card" id="card-energyMax">
+                    <div class="card-info">
+                        <div class="card-avatar">
+                            <span class="card-emoji">🔋</span>
+                            <div class="level-badge" id="badge-energyMax">0</div>
+                        </div>
+                        <div>
+                            <div class="card-name">Доп. смена</div>
+                            <div class="card-effect">+50 макс. энергии</div>
+                        </div>
+                    </div>
+                    <button class="buy-btn" id="buy-energyMax">Купить: <span class="card-cost">200</span> $</button>
+                </div>
+
+                <div class="upgrade-card" id="card-energyRegen">
+                    <div class="card-info">
+                        <div class="card-avatar">
+                            <span class="card-emoji">☕</span>
+                            <div class="level-badge" id="badge-energyRegen">0</div>
+                        </div>
+                        <div>
+                            <div class="card-name">Кружка чифира</div>
+                            <div class="card-effect">+1 энергии/сек.</div>
+                        </div>
+                    </div>
+                    <button class="buy-btn" id="buy-energyRegen">Купить: <span class="card-cost">250</span> $</button>
+                </div>
+
+                <div class="upgrade-card" id="card-boots">
+                    <div class="card-info">
+                        <div class="card-avatar">
+                            <span class="card-emoji">🥾</span>
+                            <div class="level-badge" id="badge-boots">0</div>
+                        </div>
+                        <div>
+                            <div class="card-name">Удобные берцы</div>
+                            <div class="card-effect">+10 $/час</div>
+                        </div>
+                    </div>
+                    <button class="buy-btn" id="buy-boots">Купить: <span class="card-cost">150</span> $</button>
+                </div>
+
+                <div class="upgrade-card" id="card-cigarettes">
+                    <div class="card-info">
+                        <div class="card-avatar">
+                            <span class="card-emoji">🚬</span>
+                            <div class="level-badge" id="badge-cigarettes">0</div>
+                        </div>
+                        <div>
+                            <div class="card-name">Пачка «Примы»</div>
+                            <div class="card-effect">+60 $/час</div>
+                        </div>
+                    </div>
+                    <button class="buy-btn" id="buy-cigarettes">Купить: <span class="card-cost">800</span> $</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav" id="bottomNav">
+            <div class="liquid-slider" id="liquidSlider"></div>
+
+            <button class="nav-btn active" data-screen="screen-work">
+                <span class="nav-icon">🪓</span>
+                <span class="nav-text">Работа</span>
+            </button>
+            <button class="nav-btn" data-shop="true">
+                <span class="nav-icon">🏪</span>
+                <span class="nav-text">Магазин</span>
+            </button>
+            <button class="nav-btn" data-screen="screen-tasks">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text">Задания</span>
+            </button>
+            <button class="nav-btn" data-screen="screen-friends">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
